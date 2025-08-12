@@ -31,7 +31,7 @@ pnpm install --frozen-lockfile
 # Build API
 echo "🔨 Building API..."
 cd apps/api
-pnpm prisma generate
+# Skip Prisma generate since we removed database operations
 pnpm run build
 cd ../..
 
@@ -39,13 +39,6 @@ cd ../..
 echo "🔨 Building Web..."
 cd apps/web
 pnpm run build
-
-# Copy public files to standalone directory for Next.js
-echo "📁 Setting up Next.js standalone files..."
-if [ -d ".next/standalone" ]; then
-    cp -r public .next/standalone/apps/web/public 2>/dev/null || true
-    cp -r .next/static .next/standalone/apps/web/.next/static 2>/dev/null || true
-fi
 cd ../..
 
 # Stop existing PM2 processes
@@ -53,11 +46,7 @@ echo "🛑 Stopping existing PM2 processes..."
 pm2 stop ecosystem.config.js || true
 pm2 delete ecosystem.config.js || true
 
-# Run database migrations
-echo "🗃️  Running database migrations..."
-cd apps/api
-pnpm prisma migrate deploy
-cd ../..
+# Database operations disabled - skipping migrations
 
 # Start applications with PM2
 echo "🚀 Starting applications with PM2..."
