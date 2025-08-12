@@ -324,23 +324,3 @@ sudo tail -f /var/log/nginx/access.log
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- [Solana Labs](https://solana.com/) for the blockchain infrastructure
-- [NestJS](https://nestjs.com/) for the backend framework
-- [Next.js](https://nextjs.org/) for the frontend framework
-- [shadcn/ui](https://ui.shadcn.com/) for UI components
-
-## 📞 Support
-
-For support, please open an issue in the GitHub repository or contact the development team.
-
----
-
-**Live Demo**: [https://tanweihup.dev](https://tanweihup.dev)
-
-Built with ❤️ for the Solana ecosystem
