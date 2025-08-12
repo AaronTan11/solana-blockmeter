@@ -26,7 +26,7 @@ module.exports = {
     {
       name: 'solana-blockmeter-web',
       script: 'server.js',
-      cwd: './apps/web',
+      cwd: './apps/web/.next/standalone/apps/web',
       instances: 1,
       exec_mode: 'cluster',
       env: {

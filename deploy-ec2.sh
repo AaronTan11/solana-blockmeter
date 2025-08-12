@@ -39,6 +39,13 @@ cd ../..
 echo "🔨 Building Web..."
 cd apps/web
 pnpm run build
+
+# Copy public files to standalone directory for Next.js
+echo "📁 Setting up Next.js standalone files..."
+if [ -d ".next/standalone" ]; then
+    cp -r public .next/standalone/apps/web/public 2>/dev/null || true
+    cp -r .next/static .next/standalone/apps/web/.next/static 2>/dev/null || true
+fi
 cd ../..
 
 # Stop existing PM2 processes
