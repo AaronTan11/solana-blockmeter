@@ -1,8 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ConfigService } from '@nestjs/config';
+import { CacheModule } from '@nestjs/cache-manager';
 import { BlocksController } from './blocks.controller';
 import { BlocksService } from './blocks.service';
-import { PrismaService } from '../prisma/prisma.service';
 
 describe('BlocksController', () => {
   let controller: BlocksController;
@@ -14,6 +13,7 @@ describe('BlocksController', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      imports: [CacheModule.register()],
       controllers: [BlocksController],
       providers: [
         { provide: BlocksService, useValue: mockBlocksService },
