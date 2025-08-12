@@ -2,6 +2,10 @@
 
 A real-time Solana blockchain data application that provides instant transaction counts and block metadata with intelligent caching for optimal performance.
 
+🌐 **Live Demo**: [https://tanweihup.dev/](https://tanweihup.dev/)
+
+🎥 **Demo Video**: [Watch the application in action](https://www.loom.com/share/3393c7a39c174bbcb33f779edc0e0dbe?sid=250476f5-b8ae-48fa-abe7-a665a9e5b808)
+
 ![Solana BlockMeter](https://img.shields.io/badge/Solana-BlockMeter-9945FF?style=for-the-badge&logo=solana)
 ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)
 ![NestJS](https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=nestjs&logoColor=white)
