@@ -316,11 +316,69 @@ sudo tail -f /var/log/nginx/error.log
 sudo tail -f /var/log/nginx/access.log
 ```
 
-## 🤝 Contributing
+## 📋 TODO / Known Issues
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+### 🚧 **Currently Disabled Features temporarily**
+So there are some features that are commented out in the codebase and need to be re-enabled:
 
+
+- **Database Integration (Prisma + RDS)**
+  - [ ] Prisma ORM integration currently disabled in `app.module.ts`
+  - [ ] PostgreSQL RDS database connection issues
+  - [ ] Block data persistence to database
+  - [ ] Historical data storage and retrieval
+
+- **Background Job Processing (BullMQ)**
+  - [ ] Background job queue system disabled
+  - [ ] Async block data processing not working
+  - [ ] Job retry mechanisms not active
+  - [ ] Queue monitoring dashboard missing
+
+- **Redis Caching (ElastiCache)**
+  - [ ] Redis connection issues with AWS ElastiCache
+  - [ ] Currently using in-memory caching as fallback
+  - [ ] Redis URL configuration problems (double port issue)
+  - [ ] Distributed caching not working across instances
+
+### 🔧 **Planned Improvements**
+
+- **Infrastructure**
+  - [ ] Fix AWS RDS security group configuration
+  - [ ] Resolve Redis ElastiCache connection issues
+  - [ ] Implement proper environment variable loading
+  - [ ] Add CloudFront CDN setup
+  - [ ] Database connection pooling optimization
+
+
+- **DevOps**
+  - [ ] Automated deployment pipeline
+  - [ ] Health check endpoints improvement
+  - [ ] Monitoring and alerting setup
+  - [ ] Log aggregation and analysis
+  - [ ] Backup and recovery procedures
+
+
+### ⚠️ **Current Limitations**
+
+- **No Data Persistence**: Block data is only cached, not stored permanently
+- **Single Instance**: No horizontal scaling due to in-memory cache
+- **No Background Processing**: All API calls are synchronous
+- **Limited Error Handling**: Some edge cases not covered
+- **No User Management**: No authentication or user-specific features
+
+### 🎯 **Priority Fixes**
+
+1. **High Priority**
+   - [ ] Fix database connection and enable Prisma
+   - [ ] Resolve Redis ElastiCache integration
+
+2. **Medium Priority**
+   - [ ] Re-enable background job processing
+
+3. **Low Priority**
+   - [ ] Improve frontend UX/UI
+   - [ ] Add documentation for developers
+
+
+
+### That's it! Thanks for viewing and considering this project as application to the JD 🫶
