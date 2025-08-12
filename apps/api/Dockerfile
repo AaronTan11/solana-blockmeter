@@ -26,9 +26,9 @@ COPY apps/api ./apps/api
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
 # Generate Prisma Client and build the application
-WORKDIR /app/apps/api
-RUN corepack enable pnpm && pnpm prisma generate
-RUN corepack enable pnpm && pnpm run build
+WORKDIR /app
+RUN corepack enable pnpm && pnpm --filter=api exec prisma generate
+RUN corepack enable pnpm && pnpm --filter=api run build
 
 # Production image, copy all the files and run nest
 FROM base AS runner

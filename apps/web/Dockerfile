@@ -32,9 +32,9 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED=1
 
-# Build the application from the workspace root
-WORKDIR /app
-RUN corepack enable pnpm && pnpm --filter=web run build
+# Build the application from the web directory with workspace context
+WORKDIR /app/apps/web
+RUN corepack enable pnpm && PNPM_WORKSPACE_ROOT=/app pnpm --filter=web run build
 
 # Production image, copy all the files and run next
 FROM base AS runner
