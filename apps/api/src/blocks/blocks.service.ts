@@ -15,6 +15,7 @@ export class BlocksService {
 
   async getTransactionCount(blockNumber: number) {
     try {
+      // Fetch from Solana (caching handled by CacheInterceptor in controller now)
       const block = await this.connection.getBlock(blockNumber, {
         maxSupportedTransactionVersion: 0,
       });
