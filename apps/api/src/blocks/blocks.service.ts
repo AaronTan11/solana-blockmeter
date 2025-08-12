@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { InjectQueue } from '@nestjs/bullmq';
-import { Queue } from 'bullmq';
+// import { InjectQueue } from '@nestjs/bullmq';
+// import { Queue } from 'bullmq';
 import { Connection } from '@solana/web3.js';
-import { SolanaBlockJob } from './blocks.processor';
+// import { SolanaBlockJob } from './blocks.processor';
 
 @Injectable()
 export class BlocksService {
@@ -11,7 +11,7 @@ export class BlocksService {
 
   constructor(
     private configService: ConfigService,
-    @InjectQueue('solana-blocks') private solanaBlocksQueue: Queue<SolanaBlockJob>,
+    // @InjectQueue('solana-blocks') private solanaBlocksQueue: Queue<SolanaBlockJob>,
   ) {
     const rpcUrl = this.configService.get<string>('solana.rpcUrl');
     const commitmentLevel = this.configService.get<string>('solana.commitmentLevel');
@@ -38,16 +38,16 @@ export class BlocksService {
         timestamp: block.blockTime,
       };
 
-      // Queue background job to store in database (non-blocking)
-      await this.solanaBlocksQueue.add('store-block', result, {
-        attempts: 3,
-        backoff: {
-          type: 'exponential',
-          delay: 2000,
-        },
-        removeOnComplete: 100, // Keep last 100 completed jobs
-        removeOnFail: 50, // Keep last 50 failed jobs
-      });
+      // Database storage disabled - caching only
+      // await this.solanaBlocksQueue.add('store-block', result, {
+      //   attempts: 3,
+      //   backoff: {
+      //     type: 'exponential',
+      //     delay: 2000,
+      //   },
+      //   removeOnComplete: 100, // Keep last 100 completed jobs
+      //   removeOnFail: 50, // Keep last 50 failed jobs
+      // });
 
       return result;
     } catch (error) {
