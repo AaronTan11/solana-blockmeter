@@ -17,9 +17,9 @@ git pull origin main
 
 # Build and start services
 echo "🔨 Building and starting Docker containers..."
-docker-compose down
-docker-compose build --no-cache
-docker-compose up -d
+sudo docker-compose down
+sudo docker-compose build --no-cache
+sudo docker-compose up -d
 
 # Wait for services to be ready
 echo "⏳ Waiting for services to start..."
@@ -38,7 +38,7 @@ curl -f http://localhost/health || echo "❌ Nginx not responding"
 
 # Run database migrations
 echo "🗃️  Running database migrations..."
-docker-compose exec nestjs-api npx prisma migrate deploy
+sudo docker-compose exec nestjs-api npx prisma migrate deploy
 
 echo "✅ Deployment complete!"
 echo "🌐 Frontend: http://localhost"
