@@ -9,5 +9,11 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.6.5"
+  "packageManager": "pnpm@10.6.5",
+  "dependencies": {
+    "sst": "3.17.10"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "8.10.152"
+  }
 }

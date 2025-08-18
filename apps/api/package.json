@@ -17,7 +17,10 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "test:integration": "jest --testPathPattern=integration.spec.ts",
+    "test:unit": "jest --testPathPattern=spec.ts --testPathIgnorePatterns=integration.spec.ts",
+    "test:all": "pnpm run test:unit && pnpm run test:integration && pnpm run test:e2e"
   },
   "dependencies": {
     "@keyv/redis": "^5.1.0",
@@ -33,9 +36,11 @@
     "bullmq": "^5.56.10",
     "cache-manager": "^7.1.1",
     "cacheable": "^1.10.3",
+    "ioredis": "^5.7.0",
     "keyv": "^5.5.0",
     "reflect-metadata": "^0.2.2",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "sst": "^3.17.10"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",

@@ -1,5 +1,4 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
-
+// Client-side API that calls Next.js API routes (no CORS issues)
 export interface BlockData {
   blockNumber: number;
   transactionCount: number;
@@ -15,7 +14,56 @@ export class ApiError extends Error {
 }
 
 export async function getBlockData(blockNumber: string | number): Promise<BlockData> {
-  const response = await fetch(`${API_BASE_URL}/blocks/${blockNumber}`, {
+  const response = await fetch('/api/blocks', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ blockNumber }),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+    
+    if (response.status === 404) {
+      throw new ApiError(404, errorData.error || `Block ${blockNumber} not found`);
+    }
+    throw new ApiError(response.status, errorData.error || `Failed to fetch block data: ${response.statusText}`);
+  }
+
+  return response.json();
+}
+
+export interface BatchBlockResult {
+  blockNumber: number;
+  success: boolean;
+  data?: BlockData;
+  error?: string;
+}
+
+export interface BatchBlockResponse {
+  results: BatchBlockResult[];
+}
+
+export async function getMultipleBlocks(blockNumbers: (string | number)[]): Promise<BatchBlockResponse> {
+  const response = await fetch('/api/blocks/batch', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ blockNumbers }),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+    throw new ApiError(response.status, errorData.error || 'Failed to fetch multiple blocks');
+  }
+
+  return response.json();
+}
+
+export async function checkApiHealth() {
+  const response = await fetch('/api/health', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -23,10 +71,7 @@ export async function getBlockData(blockNumber: string | number): Promise<BlockD
   });
 
   if (!response.ok) {
-    if (response.status === 404) {
-      throw new ApiError(404, `Block ${blockNumber} not found`);
-    }
-    throw new ApiError(response.status, `Failed to fetch block data: ${response.statusText}`);
+    throw new ApiError(response.status, 'Health check failed');
   }
 
   return response.json();
